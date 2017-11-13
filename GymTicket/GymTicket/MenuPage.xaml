@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymTicket.MenuPage"
+             xmlns:pages="clr-namespace:GymTicket;assembly=GymTicket"
+             NavigationPage.HasBackButton="False"
+             Title="Explore">
+    <pages:MenuPageTab1/>
+    <pages:MenuPageTab2/>
+    <pages:MenuPageTab3/>
+</TabbedPage>

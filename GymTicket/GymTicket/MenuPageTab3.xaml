@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymTicket.MenuPageTab3"
+             Title="About">
+    <StackLayout>
+        <Label Text="This mobile application is a ticketing system for gym equipment."/>
+        <Label Text="Designed by: Eric Merryman" HorizontalOptions="Center"/>
+    </StackLayout>
+</ContentPage>

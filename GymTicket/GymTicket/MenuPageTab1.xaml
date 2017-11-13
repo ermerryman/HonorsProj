@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymTicket.MenuPageTab1"
+             Title="My Gym">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="See our equipment!" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <ListView Grid.Row="1" x:Name="Connection" HasUnevenRows="False" ItemTapped="EquipmentSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="8*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding imageURL}"/>
+                            <Label Grid.Column="1" Text="{Binding equipID}" FontSize="Small"/>
+                            <Label Grid.Column="2" Text="{Binding equipName}" FontSize="Medium"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

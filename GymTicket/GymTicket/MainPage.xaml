@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GymTicket"
+             x:Class="GymTicket.MainPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="Welcome to GymTicket!" 
+               
+           VerticalOptions="Center" 
+           HorizontalOptions="Center"/>
+        <Label Grid.Row="1" x:Name="Request" Text="Please sign in to continue."
+           VerticalOptions="Center"
+           HorizontalOptions="Center"/>
+        <Entry Grid.Row="2" x:Name="username" Placeholder="Username"/>
+        <Entry Grid.Row="3" x:Name="password" Placeholder="Password" IsPassword="True" />
+        <Button Grid.Row="4" x:Name="SignInBtn" Text="Sign In"/>
+    </Grid>
+</ContentPage>

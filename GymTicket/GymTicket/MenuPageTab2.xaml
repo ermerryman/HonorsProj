@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymTicket.MenuPageTab2"
+             Title="Schedule">
+    <Grid x:Name="ScheduleGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="Check out our schedule!" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <ListView x:Name="ScheduleLV" Grid.Row="1" SeparatorColor="Black" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Spacing="5">
+                                <Label Text="{Binding Day}" FontSize="Large" TextColor="Coral"/>
+                                <Label Text="{Binding Activity}" FontSize="Medium" TextColor="LawnGreen"/>
+                                <Label Text="{Binding Time}" FontSize="Small" TextColor="Black"/>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>
