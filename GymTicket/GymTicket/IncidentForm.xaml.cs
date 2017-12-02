@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Newtonsoft.Json;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,26 +20,25 @@ namespace GymTicket
         {
             InitializeComponent();
 
-            globalEq = eq;
-        }
+            client.BaseAddress = new Uri("http://192.168.0.5:3000/");
 
-        public void SubmitForm(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine(Description.Text);
-            System.Diagnostics.Debug.WriteLine(globalEq.equipID);
-            System.Diagnostics.Debug.WriteLine(globalEq.equipName);
+            globalEq = eq;
         }
 
         public async void ReportIssue(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Issue reported for " + globalEq.equipID + ": " + globalEq.equipName);
-            var res = await client.GetAsync("/sendEmail/" + globalEq.equipID);
-            var result = await res.Content.ReadAsStringAsync();
+            var jsonData = JsonConvert.SerializeObject(new { userDesc = Description.Text });
+
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("/api/reportIncident/"+globalEq.equipID, content);
+
+            var result = await response.Content.ReadAsStringAsync();
             if (result == "E-mail sent!")
             { var ok = DisplayAlert("Success", "The issue has been reported.", "OK"); }
             else
             { var notOk = DisplayAlert("Uh-Oh", "There was an error reporting the issue.", "OK"); }
             Page x = await Navigation.PopModalAsync();
+            //TODO: Figure out how to reload ContentPage after pop
         }
     }
 }

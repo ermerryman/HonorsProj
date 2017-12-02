@@ -31,7 +31,6 @@ namespace GymTicket
 
             globalEq = eq;
 
-            //ReportBtn.Clicked += ReportIssue;
             CheckEquipmentStatus();
         }
         public void CheckEquipmentStatus()
@@ -61,18 +60,6 @@ namespace GymTicket
                 else
                 { System.Diagnostics.Debug.WriteLine("There was an error retrievng the status"); }
             }
-        }
-      
-        public async void ReportIssue(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Issue reported for " + globalEq.equipID + ": " + globalEq.equipName);
-            var res = await client.GetAsync("/sendEmail/" + globalEq.equipID);
-            var result = await res.Content.ReadAsStringAsync();
-            if(result == "E-mail sent!")
-            { var ok = DisplayAlert("Success", "The issue has been reported.", "OK"); }
-            else
-            { var notOk = DisplayAlert("Uh-Oh", "There was an error reporting the issue.", "OK"); }
-            Page x = await Navigation.PopModalAsync();
         }
 
         public void CreateForm(object sender, EventArgs e)
