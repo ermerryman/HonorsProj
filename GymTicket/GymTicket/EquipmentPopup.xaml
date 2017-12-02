@@ -14,6 +14,6 @@
         <Label Grid.Row="1" x:Name="EquipmentName" Text="Hello, world!" HorizontalOptions="Center" VerticalOptions="Center"/>
         <Label Grid.Row="2" x:Name="PrimaryMuscle" Text="Primary muscle: " HorizontalOptions="Center" VerticalOptions="Center"/>
         <Label Grid.Row="3" x:Name="SecondaryMuscle" Text="Secondary muscle: " HorizontalOptions="Center" VerticalOptions="Center"/>
-        <Button Grid.Row="4" x:Name="ReportBtn" IsEnabled="False" Text="Report An Issue"/>
+        <Button Grid.Row="4" x:Name="ReportBtn" IsEnabled="False" Text="Report An Issue" Clicked="CreateForm"/>
     </Grid>
 </ContentPage>

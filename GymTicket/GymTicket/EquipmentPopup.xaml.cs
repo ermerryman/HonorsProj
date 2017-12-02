@@ -31,7 +31,7 @@ namespace GymTicket
 
             globalEq = eq;
 
-            ReportBtn.Clicked += ReportIssue;
+            //ReportBtn.Clicked += ReportIssue;
             CheckEquipmentStatus();
         }
         public void CheckEquipmentStatus()
@@ -73,6 +73,11 @@ namespace GymTicket
             else
             { var notOk = DisplayAlert("Uh-Oh", "There was an error reporting the issue.", "OK"); }
             Page x = await Navigation.PopModalAsync();
+        }
+
+        public void CreateForm(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new IncidentForm(globalEq));
         }
     }
 }
