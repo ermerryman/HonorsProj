@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.GymTicket" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
-	<application android:label="GymTicket.Android"></application>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<application android:label="GymTicket.Android">
+    <provider android:name="android.support.v4.content.FileProvider" 
+				android:authorities="com.companyname.GymTicket.fileprovider" 
+				android:exported="false" 
+				android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" 
+				android:resource="@xml/file_paths"></meta-data>
+    </provider>
+  </application>
 </manifest>

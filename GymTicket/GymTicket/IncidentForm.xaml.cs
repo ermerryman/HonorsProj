@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Plugin.Media;
+
 namespace GymTicket
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -39,6 +41,32 @@ namespace GymTicket
             { var notOk = DisplayAlert("Uh-Oh", "There was an error reporting the issue.", "OK"); }
             Page x = await Navigation.PopModalAsync();
             //TODO: Figure out how to reload ContentPage after pop
+        }
+
+        public async void TakePhoto()
+        {
+            if (CrossMedia.Current.IsCameraAvailable && CrossMedia.Current.IsTakePhotoSupported)
+            {
+                System.Diagnostics.Debug.WriteLine("Camera available!");
+
+                var mediaOptions = new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                { SaveToAlbum = false, SaveMetaData = false };
+
+                var file = await CrossMedia.Current.TakePhotoAsync(mediaOptions);
+
+                if(file != null)
+                {
+                    System.Diagnostics.Debug.WriteLine(file.Path);
+
+                    UserPic.Source = ImageSource.FromStream(() => { return file.GetStream(); });
+
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
     }
 }
