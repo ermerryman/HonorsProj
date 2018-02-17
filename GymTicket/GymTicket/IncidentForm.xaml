@@ -12,6 +12,6 @@
         <Entry Grid.Row="0" x:Name="Description" Placeholder="Please type a brief description..." />
         <Image Grid.Row="1" x:Name="UserPic" Source="icon.png"/>
         <Button Grid.Row="2" x:Name="TakePicBtn" Text="Take Picture" Clicked="TakePhoto"/>
-        <Button Grid.Row="3" x:Name="SubmitBtn" Text="Submit" Clicked="ReportIssue" />
+        <Button Grid.Row="3" x:Name="SubmitBtn" Text="Submit" Clicked="ReportIssueForm" />
     </Grid>
 </ContentPage>

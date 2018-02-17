@@ -14,10 +14,11 @@ using Plugin.Media;
 namespace GymTicket
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class IncidentForm: ContentPage
+    public partial class IncidentForm : ContentPage
     {
         Equipment globalEq = new Equipment();
         static HttpClient client = new HttpClient();
+        Plugin.Media.Abstractions.MediaFile imageFile;
         public IncidentForm(Equipment eq)
         {
             InitializeComponent();
@@ -27,12 +28,39 @@ namespace GymTicket
             globalEq = eq;
         }
 
+        //
+        // Use this to send multipart form with only text
+        //
         public async void ReportIssue(object sender, EventArgs e)
         {
             var jsonData = JsonConvert.SerializeObject(new { userDesc = Description.Text });
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var response = await client.PostAsync("/api/reportIncident/"+globalEq.equipID, content);
+
+            var result = await response.Content.ReadAsStringAsync();
+            if (result == "E-mail sent!")
+            { var ok = DisplayAlert("Success", "The issue has been reported.", "OK"); }
+            else
+            { var notOk = DisplayAlert("Uh-Oh", "There was an error reporting the issue.", "OK"); }
+            Page x = await Navigation.PopModalAsync();
+        }
+
+        //
+        // Use this to send multipart form with image
+        //
+        public async void ReportIssueForm(object sender, EventArgs e)
+        {
+            var jsonData = JsonConvert.SerializeObject(new { userDesc = Description.Text });
+            StringContent descData = new StringContent(Description.Text);
+            StreamContent imageData = new StreamContent(imageFile.GetStream());
+
+            MultipartFormDataContent form = new MultipartFormDataContent(); 
+
+            form.Add(descData,"userDesc");
+            form.Add(imageData, "image", "upload.jpg");
+
+            var response = await client.PostAsync("/api/reportIncident/" + globalEq.equipID, form);
 
             var result = await response.Content.ReadAsStringAsync();
             if (result == "E-mail sent!")
@@ -57,6 +85,7 @@ namespace GymTicket
                 if(file != null)
                 {
                     System.Diagnostics.Debug.WriteLine(file.Path);
+                    imageFile = file;
 
                     UserPic.Source = ImageSource.FromStream(() => { return file.GetStream(); });
 

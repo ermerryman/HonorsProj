@@ -19,7 +19,6 @@ namespace GymTicket
     {
         Equipment globalEq = new Equipment();
         static HttpClient client = new HttpClient();
-        //static int equipmentStatus;
         public EquipmentPopup(Equipment eq)
         {
             InitializeComponent();
@@ -33,6 +32,7 @@ namespace GymTicket
 
             CheckEquipmentStatus();
         }
+
         public void CheckEquipmentStatus()
         {
             try
@@ -66,14 +66,5 @@ namespace GymTicket
         {
             Navigation.PushModalAsync(new IncidentForm(globalEq));
         }
-
-        // Check status on focus change
-        //public void CheckStatusOnFocusChange()
-        //{
-        //    if(this.IsFocused)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine("Page is in focus");
-        //    }
-        //}
     }
 }
